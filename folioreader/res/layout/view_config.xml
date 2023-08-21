@@ -5,33 +5,34 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="203dp"
+    android:background="@drawable/rounded_corner"
     tools:layout_gravity="bottom">
 
     <ImageButton
         android:id="@+id/view_config_ib_day_mode"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toStartOf="@+id/view_config_ib_night_mode"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/icon_sun_sel"
+        app:srcCompat="@drawable/icon_sun_sel2"
         tools:ignore="MissingConstraints" />
 
     <ImageButton
         android:id="@+id/view_config_ib_night_mode"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/view_config_ib_day_mode"
-        app:srcCompat="@drawable/icon_moon_sel"
+        app:srcCompat="@drawable/icon_moon_sel2"
         tools:ignore="MissingConstraints" />
 
     <View
         android:id="@+id/view3"
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:background="@color/grey_color"
+        android:background="#442E83"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_config_ib_night_mode" />
@@ -39,7 +40,7 @@
     <Spinner
         android:id="@+id/view_config_font_spinner"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view3" />
 
@@ -47,7 +48,7 @@
         android:id="@+id/view4"
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:background="@color/grey_color"
+        android:background="#442E83"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_config_font_spinner" />
@@ -59,7 +60,7 @@
         android:layout_margin="8dp"
         android:adjustViewBounds="false"
         android:scaleType="center"
-        android:tint="@color/grey_color"
+        android:tint="#442E83"
         app:layout_constraintBottom_toTopOf="@+id/view5"
         app:layout_constraintEnd_toStartOf="@+id/view_config_font_size_seek_bar"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +74,7 @@
         android:layout_margin="8dp"
         android:cropToPadding="false"
         android:scaleType="center"
-        android:tint="@color/grey_color"
+        android:tint="#442E83"
         app:layout_constraintBottom_toTopOf="@+id/view5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/view_config_font_size_seek_bar"
@@ -94,7 +95,7 @@
         android:id="@+id/view5"
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:background="@color/grey_color"
+        android:background="#442E83"
         app:layout_constraintBottom_toTopOf="@+id/buttonVertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -103,7 +104,7 @@
     <com.folioreader.util.StyleableTextView
         android:id="@+id/buttonVertical"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:gravity="center"
         android:text="@string/direction_vertical"
         android:textSize="17sp"
@@ -116,7 +117,7 @@
     <com.folioreader.util.StyleableTextView
         android:id="@+id/buttonHorizontal"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:gravity="center"
         android:text="@string/direction_horizontal"
         android:textSize="17sp"
