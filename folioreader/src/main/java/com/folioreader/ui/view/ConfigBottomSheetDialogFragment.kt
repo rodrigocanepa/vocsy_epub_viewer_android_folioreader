@@ -84,11 +84,11 @@ class ConfigBottomSheetDialogFragment : BottomSheetDialogFragment() {
         configSeekBar()
         selectFont(config.font, false)
         isNightMode = config.isNightMode
-        if (isNightMode) {
+        /*if (isNightMode) {
             container.setBackgroundColor(ContextCompat.getColor(context!!, R.color.night))
         } else {
             container.setBackgroundColor(ContextCompat.getColor(context!!, R.color.white))
-        }
+        }*/
 
         if (isNightMode) {
             view_config_ib_day_mode.isSelected = false
