@@ -49,6 +49,16 @@
         <item name="android:windowExitAnimation">@anim/shrink_from_top</item>
     </style>
 
+    <style name="BottomSheetTransparent" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="BottomSheetContainerStyle">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_margin">16dp</item> <!-- Ajusta el margen según tus necesidades -->
+        <item name="android:padding">16dp</item> <!-- Ajusta el padding según tus necesidades -->
+    </style>
+
     <style name="Animations.PopUpMenu.Left">
         <item name="android:windowEnterAnimation">@anim/grow_from_bottomleft_to_topright</item>
         <item name="android:windowExitAnimation">@anim/shrink_from_topright_to_bottomleft</item>

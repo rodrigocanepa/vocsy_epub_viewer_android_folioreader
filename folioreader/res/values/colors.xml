@@ -5,7 +5,10 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="default_theme_accent_color">#71C951</color>
+    <color name="default_theme_accent_color">#442E83</color>
+    <color name="default_theme_sun_color">#CDA7FF</color>
+    <color name="default_theme_accent_color_unselected">#7F59CC</color>
+
     <color name="transparent_black">#80000000</color>
     <color name="borders">#F1EFF2</color>
     <color name="black">#000000</color>

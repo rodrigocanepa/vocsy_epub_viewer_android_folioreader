@@ -11,21 +11,34 @@
     <ImageButton
         android:id="@+id/view_config_ib_day_mode"
         android:layout_width="0dp"
-        android:layout_height="55dp"
+        android:layout_height="60dp"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toStartOf="@+id/view_config_ib_night_mode"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/icon_sun_sel2"
+        android:scaleType="fitCenter"
+        android:padding="12dp"
+        tools:ignore="MissingConstraints" />
+
+    <View
+        android:id="@+id/viewVertical1"
+        android:layout_width="1dp"
+        android:layout_height="60dp"
+        android:background="#442E83"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
     <ImageButton
         android:id="@+id/view_config_ib_night_mode"
         android:layout_width="0dp"
-        android:layout_height="55dp"
+        android:layout_height="60dp"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/view_config_ib_day_mode"
         app:srcCompat="@drawable/icon_moon_sel2"
+        android:scaleType="fitCenter"
+        android:padding="12dp"
         tools:ignore="MissingConstraints" />
 
     <View
@@ -40,7 +53,7 @@
     <Spinner
         android:id="@+id/view_config_font_spinner"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="60dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view3" />
 
@@ -101,30 +114,42 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_config_iv_label_font_small" />
 
-    <com.folioreader.util.StyleableTextView
+    <ImageButton
         android:id="@+id/buttonVertical"
         android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:gravity="center"
-        android:text="@string/direction_vertical"
-        android:textSize="17sp"
-        app:folio_font="@string/lato_font"
+        android:layout_height="60dp"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonHorizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view5" />
+        app:layout_constraintTop_toBottomOf="@+id/view5"
+        app:srcCompat="@drawable/vertical_img"
+        android:scaleType="fitCenter"
+        android:padding="15dp"
+        tools:ignore="MissingConstraints" />
 
-    <com.folioreader.util.StyleableTextView
+    <View
+        android:id="@+id/viewVertical2"
+        android:layout_width="1dp"
+        android:layout_height="60dp"
+        android:background="#442E83"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonVertical"
+        app:layout_constraintTop_toBottomOf="@+id/view5"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
         android:id="@+id/buttonHorizontal"
         android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:gravity="center"
-        android:text="@string/direction_horizontal"
-        android:textSize="17sp"
-        app:folio_font="@string/lato_font"
+        android:layout_height="60dp"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/buttonVertical"
-        app:layout_constraintTop_toBottomOf="@+id/view5" />
+        app:layout_constraintTop_toBottomOf="@+id/view5"
+        app:srcCompat="@drawable/horizontal_img"
+        android:scaleType="fitCenter"
+        android:padding="15dp"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

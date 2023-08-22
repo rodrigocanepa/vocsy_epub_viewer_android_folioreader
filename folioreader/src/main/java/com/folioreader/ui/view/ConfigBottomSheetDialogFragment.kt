@@ -3,6 +3,7 @@ package com.folioreader.ui.view
 import android.animation.Animator
 import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
+import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Build
 import android.os.Bundle
@@ -45,6 +46,7 @@ class ConfigBottomSheetDialogFragment : BottomSheetDialogFragment() {
     private var isNightMode = false
     private lateinit var activityCallback: FolioActivityCallback
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -63,6 +65,9 @@ class ConfigBottomSheetDialogFragment : BottomSheetDialogFragment() {
             val dialog = dialog as BottomSheetDialog
             val bottomSheet =
                 dialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet) as FrameLayout?
+
+            bottomSheet?.setBackgroundResource(R.drawable.rounded_corner)
+
             val behavior = BottomSheetBehavior.from(bottomSheet!!)
             behavior.state = BottomSheetBehavior.STATE_EXPANDED
             behavior.peekHeight = 0
@@ -84,28 +89,38 @@ class ConfigBottomSheetDialogFragment : BottomSheetDialogFragment() {
         configSeekBar()
         selectFont(config.font, false)
         isNightMode = config.isNightMode
-        /*if (isNightMode) {
-            container.setBackgroundColor(ContextCompat.getColor(context!!, R.color.night))
+        if (isNightMode) {
+            container.setBackgroundResource(R.drawable.rounded_corner_dark)
+            viewVertical1.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+            view3.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+            view4.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+            view5.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+            viewVertical2.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
         } else {
-            container.setBackgroundColor(ContextCompat.getColor(context!!, R.color.white))
-        }*/
+            container.setBackgroundResource(R.drawable.rounded_corner)
+            viewVertical1.setBackgroundColor(Color.parseColor("#FF442E83"))
+            view3.setBackgroundColor(Color.parseColor("#FF442E83"))
+            view4.setBackgroundColor(Color.parseColor("#FF442E83"))
+            view5.setBackgroundColor(Color.parseColor("#FF442E83"))
+            viewVertical2.setBackgroundColor(Color.parseColor("#FF442E83"))
+        }
 
         if (isNightMode) {
             view_config_ib_day_mode.isSelected = false
             view_config_ib_night_mode.isSelected = true
             UiUtil.setColorIntToDrawable(
-                config.currentThemeColor,
+                Color.parseColor("#FFFFFFFF"),
                 view_config_ib_night_mode.drawable
             )
-            UiUtil.setColorResToDrawable(R.color.app_gray, view_config_ib_day_mode.drawable)
+            UiUtil.setColorResToDrawable(R.color.white, view_config_ib_day_mode.drawable)
         } else {
             view_config_ib_day_mode.isSelected = true
             view_config_ib_night_mode.isSelected = false
             UiUtil.setColorIntToDrawable(
-                config.currentThemeColor,
+                Color.parseColor("#FF442E83"),
                 view_config_ib_day_mode!!.drawable
             )
-            UiUtil.setColorResToDrawable(R.color.app_gray, view_config_ib_night_mode.drawable)
+            UiUtil.setColorResToDrawable(R.color.default_theme_accent_color, view_config_ib_night_mode.drawable)
         }
     }
 
@@ -157,6 +172,7 @@ class ConfigBottomSheetDialogFragment : BottomSheetDialogFragment() {
             activityCallback.onDirectionChange(Config.Direction.VERTICAL)
             buttonHorizontal.isSelected = false
             buttonVertical.isSelected = true
+            dialog?.hide()
         }
 
         buttonHorizontal.setOnClickListener {
@@ -166,18 +182,29 @@ class ConfigBottomSheetDialogFragment : BottomSheetDialogFragment() {
             activityCallback.onDirectionChange(Config.Direction.HORIZONTAL)
             buttonHorizontal.isSelected = true
             buttonVertical.isSelected = false
+            dialog?.hide()
         }
     }
 
     private fun configFonts() {
 
         val colorStateList = UiUtil.getColorList(
-            config.currentThemeColor,
-            ContextCompat.getColor(context!!, R.color.grey_color)
+            Color.parseColor("#FF442E83"),
+            ContextCompat.getColor(context!!, R.color.default_theme_accent_color_unselected)
         )
 
-        buttonVertical.setTextColor(colorStateList)
-        buttonHorizontal.setTextColor(colorStateList)
+        if(config.isNightMode){
+            UiUtil.setColorResToDrawable(R.color.white, buttonVertical.drawable)
+            UiUtil.setColorResToDrawable(R.color.white, buttonHorizontal.drawable)
+
+        } else{
+            UiUtil.setColorResToDrawable(R.color.default_theme_accent_color, buttonHorizontal.drawable)
+            UiUtil.setColorResToDrawable(R.color.default_theme_accent_color, buttonVertical.drawable)
+
+        }
+        //buttonVertical.setTextColor(colorStateList)
+        //
+        // buttonHorizontal.setTextColor(colorStateList)
 
         val adapter = FontAdapter(config, context!!)
 
@@ -284,11 +311,20 @@ class ConfigBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
     private fun configSeekBar() {
         val thumbDrawable = ContextCompat.getDrawable(activity!!, R.drawable.seekbar_thumb)
-        UiUtil.setColorIntToDrawable(config.currentThemeColor, thumbDrawable)
-        UiUtil.setColorResToDrawable(
-            R.color.grey_color,
-            view_config_font_size_seek_bar.progressDrawable
-        )
+        if(config.isNightMode){
+            UiUtil.setColorIntToDrawable(Color.parseColor("#FFFFFFFF"), thumbDrawable)
+            UiUtil.setColorResToDrawable(
+                R.color.white,
+                view_config_font_size_seek_bar.progressDrawable
+            )
+        } else{
+            UiUtil.setColorIntToDrawable(Color.parseColor("#FF442E83"), thumbDrawable)
+            UiUtil.setColorResToDrawable(
+                R.color.default_theme_accent_color,
+                view_config_font_size_seek_bar.progressDrawable
+            )
+        }
+
         view_config_font_size_seek_bar.thumb = thumbDrawable
 
         view_config_font_size_seek_bar.setOnSeekBarChangeListener(object :

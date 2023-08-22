@@ -328,14 +328,16 @@ class FolioActivity : AppCompatActivity(), FolioActivityCallback, MediaControlle
 
         val config = AppUtil.getSavedConfig(applicationContext)!!
 
-        val drawable = ContextCompat.getDrawable(this, R.drawable.ic_drawer)
-        UiUtil.setColorIntToDrawable(config.currentThemeColor, drawable!!)
+        val drawable = ContextCompat.getDrawable(this, R.drawable.ic_chevron_left)
+
         toolbar!!.navigationIcon = drawable
 
         if (config.isNightMode) {
             setNightMode()
+            UiUtil.setColorIntToDrawable(Color.parseColor("#FFFFFFFF"), drawable!!)
         } else {
             setDayMode()
+            UiUtil.setColorIntToDrawable(Color.parseColor("#FF442E83"), drawable!!)
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -359,24 +361,24 @@ class FolioActivity : AppCompatActivity(), FolioActivityCallback, MediaControlle
         Log.v(LOG_TAG, "-> setDayMode")
 
         actionBar!!.setBackgroundDrawable(
-            ColorDrawable(ContextCompat.getColor(this, R.color.white))
+            ColorDrawable(ContextCompat.getColor(this, R.color.default_theme_sun_color))
         )
 
-        toolbar!!.setTitleTextColor(ContextCompat.getColor(this, R.color.black))
+        toolbar!!.setTitleTextColor(ContextCompat.getColor(this, R.color.default_theme_accent_color))
 
         val config = AppUtil.getSavedConfig(applicationContext)!!
 
         // Update drawer color
         val newNavIcon = toolbar!!.navigationIcon
-        UiUtil.setColorIntToDrawable(config.themeColor, newNavIcon)
+        UiUtil.setColorIntToDrawable(Color.parseColor("#FF442E83"), newNavIcon)
         toolbar!!.navigationIcon = newNavIcon
 
         // Update toolbar colors
         createdMenu?.let { m ->
-            UiUtil.setColorIntToDrawable(config.themeColor, m.findItem(R.id.itemBookmark).icon)
-            UiUtil.setColorIntToDrawable(config.themeColor, m.findItem(R.id.itemSearch).icon)
-            UiUtil.setColorIntToDrawable(config.themeColor, m.findItem(R.id.itemConfig).icon)
-            UiUtil.setColorIntToDrawable(config.themeColor, m.findItem(R.id.itemTts).icon)
+            UiUtil.setColorIntToDrawable(Color.parseColor("#FF442E83"), m.findItem(R.id.itemBookmark).icon)
+            UiUtil.setColorIntToDrawable(Color.parseColor("#FF442E83"), m.findItem(R.id.itemCustomMenu).icon)
+            UiUtil.setColorIntToDrawable(Color.parseColor("#FF442E83"), m.findItem(R.id.itemConfig).icon)
+            UiUtil.setColorIntToDrawable(Color.parseColor("#FF442E83"), m.findItem(R.id.itemTts).icon)
         }
 
         toolbar?.getOverflowIcon()?.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
@@ -387,10 +389,10 @@ class FolioActivity : AppCompatActivity(), FolioActivityCallback, MediaControlle
         Log.v(LOG_TAG, "-> setNightMode")
 
         actionBar!!.setBackgroundDrawable(
-            ColorDrawable(ContextCompat.getColor(this, R.color.black))
+            ColorDrawable(ContextCompat.getColor(this, R.color.default_theme_accent_color))
         )
 
-        toolbar!!.setTitleTextColor(ContextCompat.getColor(this, R.color.night_title_text_color))
+        toolbar!!.setTitleTextColor(ContextCompat.getColor(this, R.color.white))
 
         val config = AppUtil.getSavedConfig(applicationContext)!!
 
@@ -402,7 +404,7 @@ class FolioActivity : AppCompatActivity(), FolioActivityCallback, MediaControlle
         // Update toolbar colors
         createdMenu?.let { m ->
             UiUtil.setColorIntToDrawable(config.nightThemeColor, m.findItem(R.id.itemBookmark).icon)
-            UiUtil.setColorIntToDrawable(config.nightThemeColor, m.findItem(R.id.itemSearch).icon)
+            UiUtil.setColorIntToDrawable(config.nightThemeColor, m.findItem(R.id.itemCustomMenu).icon)
             UiUtil.setColorIntToDrawable(config.nightThemeColor, m.findItem(R.id.itemConfig).icon)
             UiUtil.setColorIntToDrawable(config.nightThemeColor, m.findItem(R.id.itemTts).icon)
         }
@@ -436,17 +438,31 @@ class FolioActivity : AppCompatActivity(), FolioActivityCallback, MediaControlle
 //                }
 //            }
 
+            if(config.isNightMode){
+                UiUtil.setColorIntToDrawable(
+                    Color.parseColor("#FFFFFFFF"), menu.findItem(R.id.itemBookmark).icon
+                )
+                UiUtil.setColorIntToDrawable(
+                    Color.parseColor("#FFFFFFFF"), menu.findItem(R.id.itemCustomMenu).icon
+                )
+                UiUtil.setColorIntToDrawable(
+                    Color.parseColor("#FFFFFFFF"), menu.findItem(R.id.itemConfig).icon
+                )
+                UiUtil.setColorIntToDrawable(Color.parseColor("#FFFFFFFF"), menu.findItem(R.id.itemTts).icon)
+            } else{
+                UiUtil.setColorIntToDrawable(
+                    Color.parseColor("#FF442E83"), menu.findItem(R.id.itemBookmark).icon
+                )
+                UiUtil.setColorIntToDrawable(
+                    Color.parseColor("#FF442E83"), menu.findItem(R.id.itemCustomMenu).icon
+                )
+                UiUtil.setColorIntToDrawable(
+                    Color.parseColor("#FF442E83"), menu.findItem(R.id.itemConfig).icon
+                )
+                UiUtil.setColorIntToDrawable(Color.parseColor("#FF442E83"), menu.findItem(R.id.itemTts).icon)
+            }
 
-            UiUtil.setColorIntToDrawable(
-                config.currentThemeColor, menu.findItem(R.id.itemBookmark).icon
-            )
-            UiUtil.setColorIntToDrawable(
-                config.currentThemeColor, menu.findItem(R.id.itemSearch).icon
-            )
-            UiUtil.setColorIntToDrawable(
-                config.currentThemeColor, menu.findItem(R.id.itemConfig).icon
-            )
-            UiUtil.setColorIntToDrawable(config.currentThemeColor, menu.findItem(R.id.itemTts).icon)
+
 
             if (!config.isShowTts) menu.findItem(R.id.itemTts).isVisible = false
         } catch (e: Exception) {
@@ -461,8 +477,7 @@ class FolioActivity : AppCompatActivity(), FolioActivityCallback, MediaControlle
 
         when (item.itemId) {
             android.R.id.home -> {
-                Log.v(LOG_TAG, "-> onOptionsItemSelected -> drawer")
-                startContentHighlightActivity()
+               finish()
                 return true
             }
             R.id.itemBookmark -> {
@@ -511,8 +526,8 @@ class FolioActivity : AppCompatActivity(), FolioActivityCallback, MediaControlle
 
                 return true
             }
-            R.id.itemSearch -> {
-                Log.v(LOG_TAG, "-> onOptionsItemSelected -> " + item.title)
+            R.id.itemCustomMenu-> {
+                /*Log.v(LOG_TAG, "-> onOptionsItemSelected -> " + item.title)
                 if (searchUri == null) return true
                 val intent = Intent(this, SearchActivity::class.java)
                 intent.putExtra(SearchActivity.BUNDLE_SPINE_SIZE, spine?.size ?: 0)
@@ -520,8 +535,10 @@ class FolioActivity : AppCompatActivity(), FolioActivityCallback, MediaControlle
                 intent.putExtra(SearchAdapter.DATA_BUNDLE, searchAdapterDataBundle)
                 intent.putExtra(SearchActivity.BUNDLE_SAVE_SEARCH_QUERY, searchQuery)
                 startActivityForResult(intent, RequestCode.SEARCH.value)
+                return true*/
+                Log.v(LOG_TAG, "-> onOptionsItemSelected -> drawer")
+                startContentHighlightActivity()
                 return true
-
             }
             R.id.itemConfig -> {
                 Log.v(LOG_TAG, "-> onOptionsItemSelected -> " + item.title)
