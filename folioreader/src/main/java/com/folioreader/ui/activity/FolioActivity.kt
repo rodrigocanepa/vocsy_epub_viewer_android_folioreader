@@ -388,6 +388,7 @@ class FolioActivity : AppCompatActivity(), FolioActivityCallback, MediaControlle
     override fun setNightMode() {
         Log.v(LOG_TAG, "-> setNightMode")
 
+
         actionBar!!.setBackgroundDrawable(
             ColorDrawable(ContextCompat.getColor(this, R.color.default_theme_accent_color))
         )
